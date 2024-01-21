@@ -1,0 +1,20 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: temperatureDB
+      POSTGRES_USER: axi
+      POSTGRES_PASSWORD: axi8
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/temperatureDB
+      SPRING_DATASOURCE_USERNAME: axi
+      SPRING_DATASOURCE_PASSWORD: axi8
